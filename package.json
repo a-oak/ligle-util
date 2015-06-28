@@ -1,0 +1,23 @@
+{
+  "name": "ligle-util",
+  "version": "0.1.0",
+  "description": "ligle's utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.hijack.moe/crackhopper/ligle-util.git"
+  },
+  "keywords": [
+    "ligle",
+    "util"
+  ],
+  "author": "crackhopper",
+  "license": "copyright of ligle",
+  "dependencies": {
+    "log4js":"^0.6.26"
+  },
+  "readme":"README.md"
+}
