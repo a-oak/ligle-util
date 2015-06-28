@@ -148,9 +148,17 @@ exports.noop = function(){};
 
 exports.configure = function(config,name,defaultCfg){
   if(!config) config={};
-  if(!config[name]) config[name]={};
-  for(var key in defaultCfg){
-    config[name][key] = config[name][key] || defaultCfg[key];
+  var obj;
+  if(name){
+    if(!(config[name] instanceof Object)) config[name]={};
+    for(var key in defaultCfg){
+      config[name][key] = config[name][key] || defaultCfg[key];
+    }
+  }
+  else{
+    for(var key in defaultCfg){
+      config[key] = config[key] || defaultCfg[key];
+    }
   }
   return config;
 };
