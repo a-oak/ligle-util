@@ -4,7 +4,7 @@
   "description": "ligle's utilities",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "mocha test.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "dependencies": {
     "log4js": "^0.6.26"
   },
-  "readme": "README.md"
+  "readme": "README.md",
+  "devDependencies": {
+    "chai": "^3.0.0"
+  }
 }

@@ -1,25 +1,19 @@
-var ligle = {};
-ligle.util = require('./index');
-var logger = ligle.util.logger('test','TRACE');
-logger.trace('Entering cheese testing');
-logger.debug('Got cheese.');
-logger.info('Cheese is Gouda.');
-logger.warn('Cheese is quite smelly.');
-logger.error('Cheese is too ripe!');
-logger.fatal('Cheese was breeding ground for listeria.');
+var expect = require('chai').expect;
+var util = require('./index');
 
+var configure = util.configure;
+describe('configure()',function(){
+  it('apply default config on specified field',function(){
+    var config = {a:{xx:11,yy:22},b:{}};
+    var defaultCfg = {xx:12,zz:23};
+    var cfg = configure(config,'a',defaultCfg); // apply defaultCfg on field a
+    expect(cfg).to.deep.equal({a:{xx:11,yy:22,zz:23},b:{}});
+  });
+  it('apply default config on whole scope',function(){
+    var config = {a:11,b:22};
+    var defaultCfg = {a:1,b:2,c:3};
+    var cfg = configure(config,'',defaultCfg);// apply defaultCfg on whole scope
+    expect(cfg).to.deep.equal({a:11,b:22,c:3});
+  });
+});
 
-var configure = ligle.util.configure;
-
-
-var config = {a:{xx:11,yy:22},b:{}};
-var defaultCfg = {xx:12,zz:23};
-// 对全局config中的a项进行配置
-var cfg = configure(config,'a',defaultCfg);
-// 结果：{ a: { xx: 11, yy: 22, zz: 23 }, b: {} }
-logger.info(cfg);
-
-config = {a:11,b:22};
-defaultCfg = {a:1,b:2,c:3};
-cfg = configure(config,'',defaultCfg);
-logger.info(cfg);
