@@ -17,7 +17,8 @@
   "author": "crackhopper",
   "license": "copyright of ligle",
   "dependencies": {
-    "log4js": "^0.6.26"
+    "deep-equal": "1.0.0",
+    "log4js": "0.6.26"
   },
   "readme": "README.md",
   "devDependencies": {

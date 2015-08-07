@@ -163,3 +163,5 @@ exports.configure = function(config,name,defaultCfg){
   return config;
 };
 
+var deepEqual = require('deep-equal');
+exports.deepEqual = deepEqual;
