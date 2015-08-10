@@ -165,3 +165,6 @@ exports.configure = function(config,name,defaultCfg){
 
 var deepEqual = require('deep-equal');
 exports.deepEqual = deepEqual;
+
+var deepCopy = require('deepcopy');
+exports.deepCopy = deepCopy;
