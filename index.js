@@ -8,6 +8,8 @@
 // logger.warn(‘Cheese is quite smelly.’);
 // logger.error(‘Cheese is too ripe!’);
 // logger.fatal(‘Cheese was breeding ground for listeria.’);
+//关于log4js更多内容：
+// http://m.blog.csdn.net/blog/hfty290/42843737
 var log4js = require('log4js');
 log4js.configure({
   appenders: [
@@ -15,9 +17,8 @@ log4js.configure({
     {
       type: 'file', //文件输出
       filename: 'access.log', 
-      maxLogSize: 1024,
-      backups:3,
-      category: 'normal' 
+      maxLogSize: 10000000,
+      backups:3
     }
   ]
 });
@@ -146,19 +147,10 @@ exports.isEmpty = isEmpty;
 
 exports.noop = function(){};
 
-exports.configure = function(config,name,defaultCfg){
-  if(!config) config={};
-  var obj;
-  if(name){
-    if(!(config[name] instanceof Object)) config[name]={};
-    for(var key in defaultCfg){
-      config[name][key] = config[name][key] || defaultCfg[key];
-    }
-  }
-  else{
-    for(var key in defaultCfg){
-      config[key] = config[key] || defaultCfg[key];
-    }
+exports.configure = function(config,defaultCfg){
+  if(!config || typeof config !== "object") config={};
+  for(var key in defaultCfg){
+    config[key] = config[key] || defaultCfg[key];
   }
   return config;
 };
