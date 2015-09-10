@@ -1,12 +1,13 @@
 var expect = require('chai').expect;
+var should = require('chai').should();
 
-var util = require('./index')();
+var index = require('./index')();
 
 
 ////////////////// configure function //////////////////
 
-var configure = util.configure;
-var allConfigure = util.allConfigure;
+var configure = index.configure;
+var allConfigure = index.allConfigure;
 describe('configure function',function(){
   it('configure',function(){
     var config = {a:11,b:22};
@@ -23,3 +24,57 @@ describe('configure function',function(){
 });
 
 ////////////////// logger //////////////////
+describe('logger',function(){
+  it('exist',function(){
+    should.exist(index.logger);
+  });
+});
+
+////////////////// Class //////////////////
+describe('Class',function(){
+  it('exist',function(){
+    should.exist(index.Class);
+  });
+});
+
+////////////////// util //////////////////
+describe('util',function(){
+  it('exist',function(){
+    should.exist(index.isEmpty);
+    should.exist(index.noop);
+    should.exist(index.deepEqual);
+    should.exist(index.deepCopy);
+    should.exist(index.hashMD5);
+    should.exist(index.createTimeStamp);
+    should.exist(index.randCharAndDigit);
+    should.exist(index.randChar);
+    should.exist(index.randDigit);
+    should.exist(index.makeCodeGen);
+  });
+});
+
+////////////////// other //////////////////
+describe('other',function(){
+  it('exist',function(){
+    should.exist(index.pageCalculate);
+  });
+  it('pageCalculate',function(){
+    
+  });
+});
+
+////////////////// email //////////////////
+describe('email',function(){
+  it('exist',function(){
+    should.exist(index.sendEmail);
+    should.exist(index.sendTemplateEmail);
+  });
+});
+
+////////////////// sms //////////////////
+describe('sms',function(){
+  it('exist',function(){
+    should.exist(index.sendSms);
+    should.exist(index.sendSmsCode);
+  });
+});

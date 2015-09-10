@@ -1,5 +1,7 @@
+var index = require('./index.js')();
+
 //page calculate
-var pageCalculate = exports.pageCalculate = function(curPage, totalNum){
+var pageCalculate = function(curPage, totalNum){
   var pageNum = 2;
   var plus = totalNum%pageNum === 0?0:1;
   var totalPage = parseInt(totalNum/pageNum) +plus;
@@ -8,5 +10,16 @@ var pageCalculate = exports.pageCalculate = function(curPage, totalNum){
   if(curPage <= 1) curPage = 1;
   var skipNum = (curPage -1)*pageNum;
   var limitNum = pageNum;
-  return {curPage:curPage, totalPage:totalPage, skipNum:skipNum, limitNum:limitNum}
-}
+  return {curPage:curPage, totalPage:totalPage, skipNum:skipNum, limitNum:limitNum};
+};
+
+
+var exportObj;
+module.exports = function(cfg){
+  if(exportObj) return exportObj;
+  exportObj = {};
+  exportObj.pageCalculate = pageCalculate;
+  // adding code here
+  return exportObj;
+};
+

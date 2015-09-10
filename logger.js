@@ -13,7 +13,7 @@ var log4js = require('log4js');
 
 var exportObj;
 module.exports = function(cfg){
-  if(exportObj) return;
+  if(exportObj) return exportObj;
   exportObj = {};
 
   log4js.configure({
@@ -32,6 +32,7 @@ module.exports = function(cfg){
     logger.setLevel(level);
     return logger;
   };
+  return exportObj;
 };
 
 

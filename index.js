@@ -25,26 +25,60 @@ var allConfigure = function(config,defaultCfg){
   return config;
 };
 
+var extend = function(obj,ext){
+  var k;
+  for(k in ext){
+    obj[k] = ext[k];
+  }
+};
+
 
 var exportObj;
-module.exports = function(cfg){
-  if(exportObj) return null;
+var exporter =  function(cfg){
+  if(exportObj) return exportObj;
   if(!cfg) cfg = {};
-  var defualtCfg = require('./cfg.js');
-
+  var defaultCfg = require('./cfg.js');
+  cfg = allConfigure(cfg,defaultCfg);
+  var tmp,_cfg;
+  
   exportObj={};
   // configure
   exportObj.configure = configure;
   exportObj.allConfigure = allConfigure;
 
   // logger
-  exportObj.logger = require('./logger.js')(cfg.logger);
+  tmp = require('./logger.js')(cfg.logger);
+  extend(exportObj,tmp);
+  var logger = exports.logger = exportObj.logger(cfg.loggerName,cfg.loggerLevel);
+  logger.trace(cfg);
 
   // class
-  //exportObj.Class = require('./class.js')(cfg.cls);
+  tmp = require('./class.js')(cfg.cls);
+  extend(exportObj,tmp);
+
+
+  // util
+  tmp = require('./util.js')(cfg.util);
+  extend(exportObj,tmp);
+
+  // other
+  tmp = require('./other.js')(cfg.other);
+  extend(exportObj,tmp);
+
+  // email
+  tmp = require('./email.js')(cfg.email);
+  extend(exportObj,tmp);
+
+  // sms
+  tmp = require('./sms.js')(cfg.sms);
+  extend(exportObj,tmp);
   
   return exportObj;
 };
 
+// 用来在初始化的时候，配置使用
+exporter.allConfigure = allConfigure;
+exporter.configure = configure;
+exporter.extend = extend;
 
-
+module.exports = exporter;

@@ -2,11 +2,14 @@ var crypto = require('crypto');
 var util = require('util');
 var deepEqual = require('deep-equal');
 var deepCopy = require('deepcopy');
+var moment = require('moment');
+
+var index = require('./index.js')();
+
 // 判断对象是否为空
 // Speed up calls to hasOwnProperty
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 function isEmpty(obj) {
-
     // null and undefined are "empty"
     if (obj == null) return true;
 
@@ -25,36 +28,26 @@ function isEmpty(obj) {
     return true;
 }
 
-exports.isEmpty = isEmpty;
-
-exports.noop = function(){};
-
-
-exports.deepEqual = deepEqual;
-exports.deepCopy = deepCopy;
-
-
 /// 总结的常用函数
-var hashMD5 = exports.hashMD5 = function(str){
+var hashMD5 = function(str){
   return crypto.createHash('md5').update(str).digest('hex');
 };
 
-var createTimeStamp = exports.createTimeStamp = function(fmt){
+var createTimeStamp = function(fmt){
   return moment().format(fmt);
 };
-var randChar = exports.randChar = function (){
+var randChar = function (){
   return String.fromCharCode(parseInt(Math.random()*26)+65);
 };
-var randDigit = exports.randDigit = function (){
+var randDigit = function (){
   return parseInt(Math.random()*10);
 };
-
 var randCharAndDigit = function(mode){
   if(Math.random()>0.5) return randChar();
   else return randDigit();
 };
 
-var makeCodeGen = exports.makeCodeGen = function(length,mode){
+var makeCodeGen = function(length,mode){
   length = length || 1;
   mode = mode || 'both';
   if(mode==='both'){
@@ -77,3 +70,26 @@ var makeCodeGen = exports.makeCodeGen = function(length,mode){
     throw Error('support mode: digit/both; not support:'+mode);
   }
 };
+
+
+var exportObj;
+module.exports = function(cfg){
+  if(exportObj) return exportObj;
+  exportObj = {};
+  // adding code here
+
+  exportObj.isEmpty = isEmpty;
+  exportObj.noop = function(){};
+  exportObj.deepEqual = deepEqual;
+  exportObj.deepCopy = deepCopy;
+  exportObj.hashMD5 = hashMD5;
+  exportObj.createTimeStamp = createTimeStamp;
+  exportObj.randCharAndDigit = randCharAndDigit;
+  exportObj.randChar = randChar;
+  exportObj.randDigit = randDigit;
+  exportObj.makeCodeGen = makeCodeGen;
+
+  return exportObj;
+};
+
+
