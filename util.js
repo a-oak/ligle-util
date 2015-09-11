@@ -3,6 +3,8 @@ var util = require('util');
 var deepEqual = require('deep-equal');
 var deepCopy = require('deepcopy');
 var moment = require('moment');
+var fs = require('fs');
+var path =  require('path');
 
 var index = require('./index.js')();
 
@@ -71,6 +73,16 @@ var makeCodeGen = function(length,mode){
   }
 };
 
+var rMkdir = function(dir){
+  index._logger.trace('rMkdir',dir);
+  if(fs.existsSync(dir)){
+    return;
+  }else{
+    var p = path.parse(dir);
+    rMkdir(p.dir);
+    fs.mkdirSync(dir);
+  }
+};
 
 var exportObj;
 module.exports = function(cfg){
@@ -88,6 +100,7 @@ module.exports = function(cfg){
   exportObj.randChar = randChar;
   exportObj.randDigit = randDigit;
   exportObj.makeCodeGen = makeCodeGen;
+  exportObj.rMkdir = rMkdir;
 
   return exportObj;
 };

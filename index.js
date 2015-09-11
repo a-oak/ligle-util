@@ -50,6 +50,7 @@ var exporter =  function(cfg){
   tmp = require('./logger.js')(cfg.logger);
   extend(exportObj,tmp);
   var logger = exports.logger = exportObj.logger(cfg.loggerName,cfg.loggerLevel);
+  exportObj._logger = logger;
   logger.trace(cfg);
 
   // class
