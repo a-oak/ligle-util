@@ -6,7 +6,7 @@
   "scripts": {
     "test": "grunt test"
   },
-  "homepage": "git://github.com/crackhopper/ligle-util",
+  "homepage": "https://github.com/a-oak/ligle-util",
   "author": "crackhopper",
   "keywords": [
     "ligle",
@@ -43,6 +43,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.hijack.moe/crackhopper/ligle-util.git"
+    "url": "https://github.com/a-oak/ligle-util.git"
   }
 }
