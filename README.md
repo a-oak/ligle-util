@@ -1,13 +1,20 @@
 
-ligle util
+ligle-util
 ====================
 
 [![Build Status](https://travis-ci.org/a-oak/ligle-util.svg?branch=master)](https://travis-ci.org/a-oak/ligle-util)
+Copyright (c) 2015 [A-Oak](http://a-oak.com/) Co. Ltd.
+
+
+## 安装
+`npm install ligle-util`
+
+https://www.npmjs.com/package/ligle-util
 
 ## 简介
-通用功能函数库
+ligle-engine使用的通用功能函数库
 
-## 文档
+## 部分文档
 * [`logger`](#logger)
 * [`Class`](#Class)
 * [`isEmpty`](#isEmpty)
