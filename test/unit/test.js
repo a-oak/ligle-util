@@ -1,7 +1,8 @@
 var expect = require('chai').expect;
 var should = require('chai').should();
 
-var index = require('./index')();
+var requireHelper = require('../require-helper');
+var index = requireHelper('index')({loggerLevel:'INFO'});
 
 
 ////////////////// configure function //////////////////
@@ -59,7 +60,6 @@ describe('other',function(){
     should.exist(index.pageCalculate);
   });
   it('pageCalculate',function(){
-    
   });
 });
 
