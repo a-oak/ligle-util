@@ -3,6 +3,7 @@ ligle-util
 ====================
 
 [![Build Status](https://travis-ci.org/a-oak/ligle-util.svg?branch=master)](https://travis-ci.org/a-oak/ligle-util)
+[![Build Status](https://travis-ci.org/a-oak/ligle-util.svg?branch=develop)](https://travis-ci.org/a-oak/ligle-util)
 Copyright (c) 2015 [A-Oak](http://a-oak.com/) Co. Ltd.
 
 
