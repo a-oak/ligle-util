@@ -1,6 +1,15 @@
-module.exports = function(grunt) {
+module.exports = function(grunt) {// jshint ignore:line
+  var semver = require('semver');
+  var util = require('util');
+  var pkg = grunt.file.readJSON('package.json');
+  var major = semver.major(pkg.version);
+  var minor = semver.minor(pkg.version);
+  var patch = semver.patch(pkg.version);
+
+  var previousTag = util.format('v%d.%d.%d',major,minor,0);
 
   grunt.initConfig({
+    pkg:pkg,
     jshint: {
       files: ['lib/**/*.js','test/**/*.js'],
       options: {
@@ -81,8 +90,56 @@ module.exports = function(grunt) {
         dir: 'test/coverage/reports',
         print: 'detail'
       }
-    }
+    },
     // end - code coverage settings
+
+    // bump version
+    bump: {
+      options: {
+        files: ['package.json'],
+        updateConfigs: ['pkg'],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['package.json','CHANGE.md'],
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: true,
+        pushTo: 'origin',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+        globalReplace: false,
+        prereleaseName: false,
+        regExp: false
+      },
+    },
+
+    // change log
+    changelog: {
+      sample: {
+        options: {
+          after:previousTag,
+          fileHeader: '\n# v<%= pkg.version%>\n'
+        }
+      }
+    },
+
+    // grunt-git begin
+    gitpush: {
+      dev: {
+        options: {
+          all:true,
+        }
+      },
+    },
+    // grunt-git end
+
+    // concat
+    concat: {
+      change:{
+        src:['changelog.txt','CHANGE.md'],
+        dest:'CHANGE.md',
+      },
+    },
   });
 
 
@@ -95,7 +152,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-istanbul');
   grunt.loadNpmTasks('grunt-env');
-
+  grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-changelog');
+  grunt.loadNpmTasks('grunt-git');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   // tasks
   grunt.registerTask('test', [
@@ -109,4 +169,31 @@ module.exports = function(grunt) {
     'instrument', 'mochaTest:unit',
     'storeCoverage', 'makeReport',
   ]);
-};
+
+  grunt.registerTask('push',[
+    'test',
+    'gitpush:dev',
+  ]);
+
+  grunt.registerTask('patch',[
+    'test',
+    'bump:patch',
+    'bump-commit',
+  ]);
+
+  grunt.registerTask('minor',[
+    'test',
+    'bump-only:minor',
+    'changelog',
+    'concat:change',
+    'bump-commit',
+  ]);
+
+  grunt.registerTask('major',[
+    'test',
+    'bump-only:major',
+    'changelog',
+    'concat:change',
+    'bump-commit',
+  ]);
+};// jshint ignore:line
