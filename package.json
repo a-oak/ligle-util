@@ -21,20 +21,24 @@
     "moment": "^2.10.6",
     "nodemailer": "^1.4.0",
     "nodemailer-smtp-transport": "^1.0.3",
-    "request": "^2.61.0"
+    "request": "^2.61.0",
+    "semver": "^5.0.3"
   },
   "devDependencies": {
     "chai": "^3.2.0",
     "grunt": "^0.4.5",
+    "grunt-bump": "^0.6.0",
+    "grunt-changelog": "^0.3.1",
     "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-copy": "^0.8.1",
     "grunt-contrib-jshint": "^0.11.3",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-env": "^0.4.4",
+    "grunt-git": "^0.3.5",
     "grunt-istanbul": "^0.6.1",
     "grunt-jscs": "^2.1.0",
     "grunt-mocha-test": "^0.12.7",
-    "grunt-push-release": ">=0.1.8",
     "istanbul": "^0.3.22",
     "mocha": "^2.3.2"
   },
