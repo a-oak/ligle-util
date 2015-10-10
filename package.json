@@ -1,6 +1,6 @@
 {
   "name": "ligle-util",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "ligle's utilities",
   "main": "lib/index.js",
   "scripts": {
